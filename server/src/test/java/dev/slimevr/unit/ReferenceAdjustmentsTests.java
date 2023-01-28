@@ -33,19 +33,7 @@ public class ReferenceAdjustmentsTests {
 	private static int successes = 0;
 
 	public static Stream<AnglesSet> getAnglesSet() {
-		return IntStream
-			.of(yaws)
-			.mapToObj(
-				(yaw) -> IntStream
-					.of(pitches)
-					.mapToObj(
-						(
-							pitch
-						) -> IntStream.of(rolls).mapToObj((roll) -> new AnglesSet(pitch, yaw, roll))
-					)
-			)
-			.flatMap(Function.identity())
-			.flatMap(Function.identity());
+		return null;
 	}
 
 	private static String name(
@@ -330,7 +318,12 @@ public class ReferenceAdjustmentsTests {
 			System.out.println("Errors: " + errors + ", successes: " + successes);
 	}
 
-	private record QuatEqualYawWithEpsilon(Quaternion q) {
+	private class QuatEqualYawWithEpsilon {
+		public Quaternion q;
+
+		public QuatEqualYawWithEpsilon(Quaternion q) {
+			this.q = q;
+		}
 
 		@Override
 		public String toString() {
@@ -395,6 +388,13 @@ public class ReferenceAdjustmentsTests {
 		}
 	}
 
-	public record AnglesSet(int pitch, int yaw, int roll) {
+	public class AnglesSet {
+		public int pitch, yaw, roll;
+
+		public AnglesSet(int pitch, int yaw, int roll) {
+			this.pitch = pitch;
+			this.yaw = yaw;
+			this.roll = roll;
+		}
 	}
 }

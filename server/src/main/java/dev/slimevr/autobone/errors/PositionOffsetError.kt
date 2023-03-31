@@ -33,7 +33,7 @@ class PositionOffsetError : IAutoBoneError {
 			if (trackerFrame1 == null ||
 				!trackerFrame1.hasPosition() ||
 				trackerFrame1.bodyPosition == null ||
-				trackerFrame1.bodyPosition.trackerRole.isEmpty
+				!trackerFrame1.bodyPosition.trackerRole.isPresent
 			) {
 				continue
 			}
@@ -41,7 +41,7 @@ class PositionOffsetError : IAutoBoneError {
 			if (trackerFrame2 == null ||
 				!trackerFrame2.hasPosition() ||
 				trackerFrame2.bodyPosition == null ||
-				trackerFrame2.bodyPosition.trackerRole.isEmpty
+				!trackerFrame2.bodyPosition.trackerRole.isPresent
 			) {
 				continue
 			}

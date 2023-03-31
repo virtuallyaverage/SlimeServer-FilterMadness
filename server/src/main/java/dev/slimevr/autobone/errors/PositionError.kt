@@ -41,7 +41,7 @@ class PositionError : IAutoBoneError {
 				if (trackerFrame == null ||
 					!trackerFrame.hasPosition() ||
 					trackerFrame.bodyPosition == null ||
-					trackerFrame.bodyPosition.trackerRole.isEmpty
+					!trackerFrame.bodyPosition.trackerRole.isPresent
 				) {
 					continue
 				}

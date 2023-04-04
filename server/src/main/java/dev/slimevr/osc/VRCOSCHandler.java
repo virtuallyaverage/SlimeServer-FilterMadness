@@ -1,6 +1,8 @@
 package dev.slimevr.osc;
 
 import com.illposed.osc.*;
+import com.illposed.osc.argument.ArgumentHandler;
+import com.illposed.osc.argument.handler.Activator;
 import com.illposed.osc.messageselector.OSCPatternAddressMessageSelector;
 import com.illposed.osc.transport.OSCPortIn;
 import com.illposed.osc.transport.OSCPortOut;
@@ -20,6 +22,7 @@ import io.eiren.util.logging.LogManager;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.List;
 
 
@@ -102,6 +105,7 @@ public class VRCOSCHandler implements OSCHandler {
 			try {
 				int port = config.getPortIn();
 				oscReceiver = new OSCPortIn(
+					OSCStatic.serializer,
 					port
 				);
 				if (lastPortIn != port || !wasListening) {
@@ -133,8 +137,8 @@ public class VRCOSCHandler implements OSCHandler {
 				InetAddress address = InetAddress.getByName(config.getAddress());
 				int port = config.getPortOut();
 				oscSender = new OSCPortOut(
-					address,
-					port
+					OSCStatic.serializer,
+					new InetSocketAddress(address, port)
 				);
 				if ((lastPortOut != port && lastAddress != address) || !wasConnected) {
 					LogManager

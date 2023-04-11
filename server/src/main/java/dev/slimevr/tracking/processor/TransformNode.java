@@ -1,18 +1,19 @@
 package dev.slimevr.tracking.processor;
 
 import com.jme3.math.Transform;
-import io.eiren.util.ann.ThreadSafe;
-import io.eiren.util.collections.FastList;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
+
+import io.eiren.util.ann.ThreadSafe;
 
 
 public class TransformNode {
 
 	public final Transform localTransform = new Transform();
 	public final Transform worldTransform = new Transform();
-	public final List<TransformNode> children = new FastList<>();
+	public final List<TransformNode> children = new CopyOnWriteArrayList<>();
 	public boolean localRotation = false;
 	protected TransformNode parent;
 	protected BoneType boneType;

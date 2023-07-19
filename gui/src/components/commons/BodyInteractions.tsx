@@ -196,10 +196,10 @@ export function BodyInteractions({
                   <div
                     className={classNames(
                       'absolute rounded-full outline outline-2 outline-background-20 transition-opacity',
-                      'hover:bg-accent-background-40',
+                      'hover:bg-accent-background-20',
                       (assignedRoles.includes((BodyPart as any)[id]) &&
-                        'bg-background-70') ||
-                        'bg-background-10',
+                        'bg-accent-background-40') ||
+                        'bg-background-50',
                       (hidden && 'opacity-0') || 'opacity-100'
                     )}
                     style={{

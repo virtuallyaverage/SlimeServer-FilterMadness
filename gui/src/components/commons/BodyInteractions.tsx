@@ -198,8 +198,8 @@ export function BodyInteractions({
                       'absolute rounded-full outline outline-2 outline-background-20 transition-opacity',
                       'hover:bg-accent-background-20',
                       (assignedRoles.includes((BodyPart as any)[id]) &&
-                        'bg-accent-background-40') ||
-                        'bg-background-50',
+                        'bg-accent-background-30') ||
+                        'bg-background-60',
                       (hidden && 'opacity-0') || 'opacity-100'
                     )}
                     style={{

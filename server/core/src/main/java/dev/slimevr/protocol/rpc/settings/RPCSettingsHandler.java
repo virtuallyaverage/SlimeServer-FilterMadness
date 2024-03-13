@@ -395,6 +395,7 @@ public class RPCSettingsHandler {
 				resetsConfig.setMode(mode);
 			}
 			resetsConfig.setResetMountingFeet(req.resetsSettings().resetMountingFeet());
+			resetsConfig.setForceResetHmd(req.resetsSettings().forceResetHmd());
 			resetsConfig.updateTrackersResetsSettings();
 		}
 

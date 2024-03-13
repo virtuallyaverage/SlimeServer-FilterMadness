@@ -93,17 +93,13 @@ public abstract class SteamVRBridge extends ProtobufBridge implements Runnable {
 			);
 
 		String displayName;
-		boolean needsReset;
 		if (trackerAdded.getTrackerId() == 0) {
 			if (trackerAdded.getTrackerName().equals("HMD"))
 				displayName = "SteamVR Driver HMD";
 			else
 				displayName = "Feeder App HMD";
-			// TODO support needsReset = true for VTubing (GUI toggle?)
-			needsReset = false;
 		} else {
 			displayName = trackerAdded.getTrackerName();
-			needsReset = true;
 		}
 
 		Tracker tracker = new Tracker(
@@ -122,7 +118,7 @@ public abstract class SteamVRBridge extends ProtobufBridge implements Runnable {
 			null,
 			false,
 			false,
-			needsReset
+			true
 		);
 
 		device.getTrackers().put(0, tracker);

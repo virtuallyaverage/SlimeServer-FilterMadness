@@ -32,6 +32,7 @@ class TrackerResetsHandler(val tracker: Tracker) {
 	private var driftCompensationEnabled = false
 	private var resetMountingFeet = false
 	private var armsResetMode = ArmsResetModes.BACK
+	var forceResetHmd = false
 	var allowDriftCompensation = false
 	var lastResetQuaternion: Quaternion? = null
 
@@ -106,6 +107,10 @@ class TrackerResetsHandler(val tracker: Tracker) {
 	fun readArmsResetModeConfig(config: ResetsConfig) {
 		resetMountingFeet = config.resetMountingFeet
 		armsResetMode = config.mode
+		forceResetHmd = config.forceResetHmd
+		if (tracker.isComputed && tracker.trackerPosition == TrackerPosition.HEAD && forceResetHmd && !tracker.needsMounting) {
+			resetFull(tracker.getRawRotation())
+		}
 	}
 
 	/**
@@ -136,7 +141,7 @@ class TrackerResetsHandler(val tracker: Tracker) {
 	 * mounting-reset-adjusted by applying quaternions produced after
 	 * full reset, yaw rest and mounting reset
 	 */
-	private fun adjustToReference(rotation: Quaternion): Quaternion {
+	fun adjustToReference(rotation: Quaternion): Quaternion {
 		var rot = rotation
 		rot *= mountingOrientation
 		rot = gyroFix * rot
@@ -150,7 +155,7 @@ class TrackerResetsHandler(val tracker: Tracker) {
 	 * Converts raw or filtered rotation into zero-reference-adjusted by
 	 * applying quaternions produced after full reset and yaw reset only
 	 */
-	private fun adjustToIdentity(rotation: Quaternion): Quaternion {
+	fun adjustToIdentity(rotation: Quaternion): Quaternion {
 		var rot = gyroFixNoMounting * rotation
 		rot *= attachmentFixNoMounting
 		rot = yawFixZeroReference * rot

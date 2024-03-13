@@ -288,7 +288,7 @@ class Tracker @JvmOverloads constructor(
 	 * it too much should be avoided for performance reasons.
 	 */
 	fun getRotation(): Quaternion {
-		var rot = if (allowFiltering && filteringHandler.enabled) {
+		val rot = if (allowFiltering && filteringHandler.enabled) {
 			// Get filtered rotation
 			filteringHandler.getFilteredRotation()
 		} else {
@@ -296,11 +296,15 @@ class Tracker @JvmOverloads constructor(
 			rotation
 		}
 
-		if (needsReset && !(isComputed && trackerPosition == TrackerPosition.HEAD)) {
-			// Adjust to reset, mounting and drift compensation
-			rot = resetsHandler.getReferenceAdjustedDriftRotationFrom(rot)
+		if (needsReset) {
+			if (isComputed && trackerPosition == TrackerPosition.HEAD && resetsHandler.forceResetHmd) {
+				// Adjust to reset and mounting
+				return resetsHandler.adjustToReference(rot)
+			} else if (!isComputed || trackerPosition != TrackerPosition.HEAD) {
+				// Adjust to reset, mounting and drift compensation
+				return resetsHandler.getReferenceAdjustedDriftRotationFrom(rot)
+			}
 		}
-
 		return rot
 	}
 
@@ -329,11 +333,15 @@ class Tracker @JvmOverloads constructor(
 			rotation
 		}
 
-		if (needsReset && trackerPosition != TrackerPosition.HEAD) {
-			// Adjust to reset and mounting
-			rot = resetsHandler.getIdentityAdjustedDriftRotationFrom(rot)
+		if (needsReset) {
+			if (isComputed && trackerPosition == TrackerPosition.HEAD && resetsHandler.forceResetHmd) {
+				// Adjust to reset and mounting
+				return resetsHandler.adjustToIdentity(rot)
+			} else if (!isComputed || trackerPosition != TrackerPosition.HEAD) {
+				// Adjust to reset, mounting and drift compensation
+				return resetsHandler.getIdentityAdjustedDriftRotationFrom(rot)
+			}
 		}
-
 		return rot
 	}
 

@@ -37,6 +37,9 @@ class ResetsConfig {
 	// Reset mode used for the arms
 	var mode = ArmsResetModes.BACK
 
+	// Force full reset for HMD
+	var forceResetHmd = false
+
 	fun updateTrackersResetsSettings() {
 		for (t in VRServer.instance.allTrackers) {
 			if (t.needsReset) {

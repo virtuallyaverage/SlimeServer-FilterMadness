@@ -88,6 +88,7 @@ interface SettingsForm {
   resetsSettings: {
     resetMountingFeet: boolean;
     armsMountingResetMode: number;
+    forceResetHmd: boolean;
   };
 }
 
@@ -143,6 +144,7 @@ const defaultValues = {
   resetsSettings: {
     resetMountingFeet: false,
     armsMountingResetMode: 0,
+    forceResetHmd: false,
   },
 };
 
@@ -252,6 +254,7 @@ export function GeneralSettings() {
         values.resetsSettings.resetMountingFeet;
       resetsSettings.armsMountingResetMode =
         values.resetsSettings.armsMountingResetMode;
+      resetsSettings.forceResetHmd = values.resetsSettings.forceResetHmd;
       settings.resetsSettings = resetsSettings;
     }
 
@@ -942,6 +945,7 @@ export function GeneralSettings() {
                     )}
                   />
                 </div>
+
                 <div className="flex flex-col pt-2 pb-3">
                   <Typography bold>
                     {l10n.getString(
@@ -954,7 +958,7 @@ export function GeneralSettings() {
                     )}
                   </Typography>
                 </div>
-                <div className="grid sm:grid-cols-1 gap3 pb5">
+                <div className="grid sm:grid-cols-1 gap-3 pb-5">
                   <CheckBox
                     variant="toggle"
                     outlined
@@ -962,6 +966,30 @@ export function GeneralSettings() {
                     name="toggles.selfLocalization"
                     label={l10n.getString(
                       'settings-general-fk_settings-self_localization-title'
+                    )}
+                  />
+                </div>
+
+                <div className="flex flex-col pt-2 pb-3">
+                  <Typography bold>
+                    {l10n.getString(
+                      'settings-general-fk_settings-leg_fk-force-reset-hmd-title'
+                    )}
+                  </Typography>
+                  <Typography color="secondary">
+                    {l10n.getString(
+                      'settings-general-fk_settings-leg_fk-force-reset-hmd-description'
+                    )}
+                  </Typography>
+                </div>
+                <div className="grid sm:grid-cols-1">
+                  <CheckBox
+                    variant="toggle"
+                    outlined
+                    control={control}
+                    name="resetsSettings.forceResetHmd"
+                    label={l10n.getString(
+                      'settings-general-fk_settings-leg_fk-force-reset-hmd'
                     )}
                   />
                 </div>

@@ -15,9 +15,9 @@
               "state": {
                 "file": "Sources of Drift.canvas",
                 "viewState": {
-                  "x": 796.7381280789937,
-                  "y": 841.8879525712572,
-                  "zoom": -1.1102230246251565e-16
+                  "x": 1992.5996719039322,
+                  "y": -72.05486346399763,
+                  "zoom": -0.3333333333333334
                 }
               }
             }
@@ -149,40 +149,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "floating": {
-    "id": "86ae3d740c551574",
-    "type": "floating",
-    "children": [
-      {
-        "id": "c212afb5d1a4d5b4",
-        "type": "window",
-        "children": [
-          {
-            "id": "53214ddf24477265",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "6ac1b9becc307401",
-                "type": "leaf",
-                "state": {
-                  "type": "graph",
-                  "state": {}
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": -417,
-        "y": 116,
-        "width": 649,
-        "height": 1000,
-        "maximize": true,
-        "zoom": 0
-      }
-    ]
-  },
-  "active": "defda03a7aeaf7b0",
+  "active": "b25b5cf7088a3824",
   "lastOpenFiles": [
     "Sources of Drift.canvas",
     "What is Drift.md",

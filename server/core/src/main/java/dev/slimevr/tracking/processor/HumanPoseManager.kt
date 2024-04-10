@@ -14,6 +14,7 @@ import dev.slimevr.tracking.trackers.TrackerPosition
 import dev.slimevr.tracking.trackers.TrackerRole
 import dev.slimevr.tracking.trackers.TrackerStatus
 import dev.slimevr.trackingpause.TrackingPauseHandler
+import dev.slimevr.tracking.trackers.TrackerDriftFilteringHandler
 import dev.slimevr.util.ann.VRServerThread
 import io.eiren.util.ann.ThreadSafe
 import io.eiren.util.collections.FastList
@@ -23,6 +24,7 @@ import io.github.axisangles.ktmath.Vector3
 import io.github.axisangles.ktmath.Vector3.Companion.POS_Y
 import org.apache.commons.math3.util.Precision
 import java.util.function.Consumer
+import javax.sound.midi.Track
 import kotlin.math.*
 
 /**
@@ -38,6 +40,8 @@ class HumanPoseManager(val server: VRServer?) {
 	lateinit var skeleton: HumanSkeleton
 	private var timeAtLastReset: Long = 0
 	val trackingPauseHandler: TrackingPauseHandler = TrackingPauseHandler()
+	//MINE init drift handler
+	val driftHandler: TrackerDriftFilteringHandler = TrackerDriftFilteringHandler(server)
 
 	// #region Constructors
 	init {
@@ -600,6 +604,7 @@ class HumanPoseManager(val server: VRServer?) {
 				trackersDriftText.append(tracker.name)
 				val trackerPosition = tracker.trackerPosition
 				if (trackerPosition != null) trackersDriftText.append(" (").append(trackerPosition.name).append(")")
+
 
 				trackersDriftText
 					.append(", ")

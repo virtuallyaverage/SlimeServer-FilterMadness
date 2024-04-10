@@ -1,0 +1,2 @@
+Assuming most humans don't typically move in a linear velocity, if the derivative of a trackers velocity is too constant some form of drift (most likely algorithmically induced) is present. 
+This can be flagged and accounted for

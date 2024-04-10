@@ -1,0 +1,18 @@
+{
+	"nodes":[
+		{"id":"189ea5df422f3c57","x":680,"y":-360,"width":250,"height":60,"type":"text","text":"HumanPoseManager"},
+		{"id":"6ecc21266c27ac14","x":680,"y":-70,"width":250,"height":60,"type":"text","text":"ResetTrackersFull"},
+		{"id":"02e5ca5dcc8f993a","x":-360,"y":360,"width":250,"height":60,"type":"text","text":""},
+		{"id":"f3c70c1c8bc3e5a0","type":"text","text":"ResetTrackersYaw","x":680,"y":60,"width":250,"height":60},
+		{"id":"1c272ecd9db20b88","x":-140,"y":-360,"width":250,"height":60,"type":"text","text":"FilteringHandler"},
+		{"id":"4a5105948f502efe","x":-140,"y":-260,"width":250,"height":60,"type":"text","text":"DriftHandler"},
+		{"id":"591d7b073d3d3339","x":20,"y":-100,"width":250,"height":60,"type":"text","text":"logTrackersDrift"}
+	],
+	"edges":[
+		{"id":"ad60cc5b931b0864","fromNode":"189ea5df422f3c57","fromSide":"left","toNode":"1c272ecd9db20b88","toSide":"right","label":"init"},
+		{"id":"6c61040c44fa982b","fromNode":"4a5105948f502efe","fromSide":"bottom","toNode":"591d7b073d3d3339","toSide":"left"},
+		{"id":"57d0e06bdb63fe23","fromNode":"189ea5df422f3c57","fromSide":"right","toNode":"6ecc21266c27ac14","toSide":"right"},
+		{"id":"0890ea033b89f1a2","fromNode":"189ea5df422f3c57","fromSide":"right","toNode":"f3c70c1c8bc3e5a0","toSide":"right"},
+		{"id":"0aee238acbb18a08","fromNode":"1c272ecd9db20b88","fromSide":"bottom","toNode":"4a5105948f502efe","toSide":"top"}
+	]
+}

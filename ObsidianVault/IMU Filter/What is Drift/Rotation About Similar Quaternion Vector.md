@@ -1,0 +1,1 @@
+If a IMU Gyro is consistently drifting about a similar quaternion normal vector, simply applying a drift compensation correction should correct this. Regardless of whether it is parallel to the Yaw axis

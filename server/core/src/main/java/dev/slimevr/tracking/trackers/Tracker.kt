@@ -72,6 +72,7 @@ class Tracker @JvmOverloads constructor(
 	var position = Vector3.NULL
 	val resetsHandler: TrackerResetsHandler = TrackerResetsHandler(this)
 	val filteringHandler: TrackerFilteringHandler = TrackerFilteringHandler()
+	val driftHandler: TrackerDriftFilteringHandler = TrackerDriftFilteringHandler()
 	var batteryVoltage: Float? = null
 	var batteryLevel: Float? = null
 	var ping: Int? = null

@@ -26,7 +26,6 @@ import io.github.axisangles.ktmath.Vector3
 import io.github.axisangles.ktmath.Vector3.Companion.NEG_Y
 import io.github.axisangles.ktmath.Vector3.Companion.NULL
 import io.github.axisangles.ktmath.Vector3.Companion.POS_Y
-import java.lang.IllegalArgumentException
 
 class HumanSkeleton(
 	val humanPoseManager: HumanPoseManager,
@@ -140,6 +139,7 @@ class HumanSkeleton(
 	var tapDetectionManager = TapDetectionManager(this)
 	var viveEmulation = ViveEmulation(this)
 	var localizer = Localizer(this)
+	private var pauseManager = PauseManager(this)
 
 	// Constructors
 	init {
@@ -385,8 +385,8 @@ class HumanSkeleton(
 		// Head
 		updateHeadTransforms()
 
-		// Stop at head (for the body to follow) if tracking is paused
-		if (pauseTracking) return
+		// if pause manager changed skeleton return early
+		if (pauseManager.update()) return
 
 		// Spine
 		updateSpineTransforms()
@@ -1215,10 +1215,18 @@ class HumanSkeleton(
 
 	fun setPauseTracking(pauseTracking: Boolean, sourceName: String?) {
 		if (!pauseTracking && this.pauseTracking) {
-			// If unpausing tracking, clear the legtweaks buffer
+			// clear the leg tweaks buffer
 			legTweaks.resetBuffer()
+
+			// clear pause status
+			pauseManager.clearPause()
+
 		}
 		this.pauseTracking = pauseTracking
+
+		//initialize pause
+		pauseManager.initPause(ignoreArms = true)
+
 		LogManager.info(String.format("[HumanSkeleton] ${if (pauseTracking) "Pause" else "Unpause"} tracking (%s)", sourceName))
 		// Report the new state of tracking pause
 		humanPoseManager.trackingPauseHandler.sendTrackingPauseState(pauseTracking)
